@@ -1,0 +1,62 @@
+Preprocessing.ipynb
+----------------------
+
+Files required for execution:
+- glove.840B.300d.txt (https://www.kaggle.com/stardust0/glove840b)
+- Dataset [train.csv and test.csv] (https://www.kaggle.com/c/quora-question-pairs/data)
+
+Files that get created:
+- q1_train.npy
+- q2_train.npy
+- test1.npy
+- test2.npy
+- label_train.npy
+- word_embedding_matrix.npy
+
+Here, q1_train.npy and q2_train.npy represent Numpy files that contain the preprocessed list of question 1 and question 2 from the training dataset.
+
+test1.npy and test2.npy contain the respective preprocessed features of the test dataset. 
+
+label_train.npy contains the target value (is_duplicate, a flag that determines whether or not the question pair is similar in meaning or not) in the training dataset.
+
+word_embedding_matrix.npy contains the word embedding matrix representing the weights of one word with respect to another in order to understand the relationship. This matrix is created using the GLoVe (GLobal Vectors for Word Representations) file.
+
+Steps in Preprocessing:
+- Tokenization
+  -- Create tokenizer
+  -- Fit tokenizer on lists of training and test data
+  -- Give all unique words tokens (stored in .word_index)
+- Padding
+  -- Length of all data elements = 25 by adding <pad> or truncation
+  -- Post padding
+
+
+
+LSTM.ipynb
+--------------
+
+Files required for execution:
+- q1_train.npy
+- q2_train.npy
+- test1.npy
+- test2.npy
+- label_train.npy
+- word_embedding_matrix.npy
+
+Intermediate result needed:
+- word_index
+
+word_index is a dictionary having key as the word and the value is token associated with the unique word. This is used during preditcion in order to get the token sequence associated with the sentences taken as input.
+
+Files that get created:
+- Accuracy.png
+- Loss.png
+- my_model.h5 
+
+Accuracy.png and Loss.png are the images of the plots of model accuarcy and loss versus the epoch number with respect to the training ang test dataset.
+
+The HDF5 (.h5) file which will contain:
+  1. the architecture of the model, allowing to re-create the model
+  2. the weights of the model
+  3. the training configuration (loss, optimizer)
+  4. the state of the optimizer, allowing to resume training exactly where you left off
